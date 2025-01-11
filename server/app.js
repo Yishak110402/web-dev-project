@@ -9,7 +9,7 @@ app.use(cors())
 
 app.use("/auth", authRouter)
 
-mongoose.connect("mongodb+srv://yishak:rfTtsGRqkPr5ILhL@write-wave.3yjawuk.mongodb.net/writewave?retryWrites=true&w=majority&appName=write-wave",{
+mongoose.connect("mongodb+srv://yishak:rfTtsGRqkPr5ILhL@write-wave.3yjawuk.mongodb.net/shemsu?retryWrites=true&w=majority&appName=write-wave",{
     useCreateIndex:true,
     useNewUrlParser:true,
     useFindAndModify:false,
@@ -17,8 +17,7 @@ mongoose.connect("mongodb+srv://yishak:rfTtsGRqkPr5ILhL@write-wave.3yjawuk.mongo
 }).then(()=>{
     console.log("DB Connection Successful");    
 }).catch((err)=>{
-    console.log(err.message);
-    
+    console.log(err.message);    
 })
 
 
@@ -26,6 +25,13 @@ app.all((req, res)=>{
     return res.json({
         status:"success",
         message:"Test successfull"
+    })
+})
+
+app.all("/*", (req, res)=>{
+    res.json({
+        status:"fail",
+        msg:``
     })
 })
 app.listen(6969, ()=>{
