@@ -13,10 +13,6 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    userType:{
-        type:String,
-        default:"buyer"
-    },
     createdAt: {
         type: Date,
         default: Date.now()

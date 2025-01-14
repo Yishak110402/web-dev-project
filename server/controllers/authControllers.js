@@ -4,21 +4,21 @@ const bcrypt = require("bcryptjs")
 const validate = require("validator")
 
 exports.signup = async(req, res)=>{    
-    const {name, email, password, userType} = req.body
+    const {name, email, password} = req.body
     const user = await User.findOne({email})    
     if(user){
         return res.json({
             status:"fail",
-            msg: "Email already exists"
+            msg: "Email already taken"
         })
     }
-    if(!email || !name || !password || !userType){
+    if(!email || !name || !password){
         return res.json({
             status:"fail",
             msg: "All fields are required"
         })
     }
-    const isEmail = validate.isEmail(email)    
+    const isEmail = validate.isEmail(email)   
     if(!isEmail){
         return res.json({
             status:'fail',
@@ -29,7 +29,6 @@ exports.signup = async(req, res)=>{
         name,
         email,
         password,
-        userType,
     })        
     return res.json({
         status: "success",
